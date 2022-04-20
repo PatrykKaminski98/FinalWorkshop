@@ -2,15 +2,14 @@ package pl.coderslab.ingredient;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.history.HistoryService;
+import pl.coderslab.mealNutrition.MealNutritionService;
 import pl.coderslab.product.Product;
 
-import javax.validation.Valid;
 import java.time.LocalDate;
 
 @Controller
@@ -18,11 +17,13 @@ import java.time.LocalDate;
 public class IngredientController {
 
     private final IngredientService ingredientService;
+    private final MealNutritionService mealNutritionService;
     private final HistoryService historyService;
 
 
-    public IngredientController(IngredientService ingredientService, HistoryService historyService) {
+    public IngredientController(IngredientService ingredientService, MealNutritionService mealNutritionService, HistoryService historyService) {
         this.ingredientService = ingredientService;
+        this.mealNutritionService = mealNutritionService;
         this.historyService = historyService;
     }
 
@@ -31,7 +32,7 @@ public class IngredientController {
     {
         LocalDate date = ingredientService.dateFromIngredient(ingredientService.findById(ingredient_id));
         ingredientService.delete(ingredient_id);
-        return "redirect:/meal/table/" +date.toString();
+        return "redirect:/mealNutrition/table/" +date.toString();
     }
 
     @GetMapping("/edit/{ingredient_id}")
@@ -40,18 +41,16 @@ public class IngredientController {
         Ingredient ingredient = ingredientService.findById(ingredient_id);
         System.out.println("metoda get" + ingredient);
         model.addAttribute("ingredient", ingredient);
-        model.addAttribute("product", ingredient.getProduct());
-        return "/meals/edit_ingredient";
+        return "/mealNutritions/edit_ingredient";
     }
 
     @PostMapping("/edit_ing")
-    public String editIngrPost(Ingredient ingredient, Product product)
+    public String editIngrPost(Ingredient ingredient)
     {
-        System.out.println(product.toString());
         LocalDate date = ingredientService.dateFromIngredient(ingredient);
         System.out.println("metoda post" + ingredient);
         ingredientService.editIngredient(ingredient);
-        return "redirect:/meal/table/" + date.toString();
+        return "redirect:/mealNutrition/table/" + date.toString();
     }
 
 

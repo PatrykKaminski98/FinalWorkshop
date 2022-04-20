@@ -1,7 +1,7 @@
 package pl.coderslab.user.user_goals;
 
 import org.springframework.stereotype.Service;
-import pl.coderslab.meal.MealNutrition;
+import pl.coderslab.mealNutrition.MealNutrition;
 import pl.coderslab.meal.Meal_Service;
 import pl.coderslab.user.User;
 

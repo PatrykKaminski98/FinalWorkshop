@@ -13,7 +13,8 @@
                     <form:form method="post" class="forms-sample" modelAttribute="ingredient">
                       <div class="form-group">
                         <form:label path="product">Produkt:</form:label>
-                        <form:select path="product" class="form-control" items="${products}" itemLabel="name" itemValue="name"/>
+                        <form:select id="select-state" path="product" class="form-control js-example-basic-single" items="${products}" itemLabel="name" itemValue="name"/>
+
                       </div>
                       <div class="form-group">
                         <form:label path="productQuantity">Ilość składnika:</form:label>
@@ -47,7 +48,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${ingredients}" var="ingr">
+                        <c:forEach items="${mealNutrition.ingredients}" var="ingr">
                           <tr>
                             <td>${ingr.product.name}</td>
                             <td>${ingr.productQuantity}</td>
@@ -60,7 +61,7 @@
                         </tbody>
                       </table>
                     </div>
-                    <a href="/meal/add_meal">
+                    <a href="/mealNutritions/add_meal">
                     <button type="submit" class="btn btn-success btn-icon-text">
                       <i class="mdi mdi-upload btn-icon-prepend"></i> Dodaj posiłek </button>
                     </a>

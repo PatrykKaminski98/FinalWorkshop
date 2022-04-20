@@ -1,12 +1,11 @@
 package pl.coderslab.ingredient;
 
 
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import pl.coderslab.history.HistoryRepository;
-import pl.coderslab.meal.MealNutrition;
-import pl.coderslab.meal.MealNutritionRepository;
-import pl.coderslab.meal.MealNutritionService;
+import pl.coderslab.mealNutrition.MealNutrition;
+import pl.coderslab.mealNutrition.MealNutritionRepository;
+import pl.coderslab.mealNutrition.MealNutritionService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ public class IngredientService {
     private final MealNutritionRepository mealNutritionRepository;
 
     private final MealNutritionService mealNutritionService;
+
 
     public IngredientService(IngredientRepository ingredientRepository, HistoryRepository historyRepository, MealNutritionRepository mealNutritionRepository, MealNutritionService mealNutritionService) {
         this.ingredientRepository = ingredientRepository;
@@ -42,6 +42,8 @@ public class IngredientService {
 
     void editIngredient(Ingredient ingredient){
         ingredientRepository.save(ingredient);
+        MealNutrition mealNutrition = mealNutritionService.getMealNutritionByIngredient(ingredient);
+        mealNutritionService.getMealNutritionFromIngredients(mealNutrition);
     }
 
 
@@ -67,6 +69,7 @@ public class IngredientService {
     public Ingredient save(Ingredient ingredient){
         return ingredientRepository.save(ingredient);
     }
+
 
 
 

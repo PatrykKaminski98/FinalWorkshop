@@ -6,7 +6,6 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pl.coderslab.product.ProductConverter;
-import pl.coderslab.product.ProductConverterID;
 
 @Configuration
 public class WebAppConfig implements WebMvcConfigurer {
@@ -21,19 +20,12 @@ public class WebAppConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
 
         registry.addConverter(getProductConverter());
-        registry.addConverter(getProductConverterId());
     }
 
     @Bean
     public ProductConverter getProductConverter() {
         return new ProductConverter();
     }
-
-    @Bean
-    public ProductConverterID getProductConverterId() {
-        return new ProductConverterID();
-    }
-
 
 }
 

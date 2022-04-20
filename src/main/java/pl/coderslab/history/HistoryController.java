@@ -3,7 +3,7 @@ package pl.coderslab.history;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.meal.MealNutritionService;
+import pl.coderslab.mealNutrition.MealNutritionService;
 
 @Controller
 @RequestMapping("/history")

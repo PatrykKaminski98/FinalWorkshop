@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/product/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/meals/**").hasAnyRole("USER","ADMIN")
+                .antMatchers("/mealNutritions/**").hasAnyRole("USER","ADMIN")
                 .and().formLogin() .loginPage("/login")
                 .defaultSuccessUrl("/dashboard")  // musi być
                 .and().logout().logoutSuccessUrl("/login")

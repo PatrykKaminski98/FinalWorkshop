@@ -46,6 +46,7 @@ public class RegisterController {
             return "/register";
         }
 
+        model.addAttribute("registerSuccess", true);
         return "redirect:/login";
     }
 }

@@ -3,14 +3,10 @@ package pl.coderslab.ingredient;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import pl.coderslab.history.History;
-import pl.coderslab.meal.Meal;
-import pl.coderslab.meal.MealNutrition;
 import pl.coderslab.product.Product;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity

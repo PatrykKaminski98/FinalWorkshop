@@ -1,10 +1,11 @@
-package pl.coderslab.meal;
+package pl.coderslab.mealNutrition;
 
 import org.springframework.stereotype.Service;
 import pl.coderslab.history.History;
 import pl.coderslab.ingredient.Ingredient;
 import pl.coderslab.ingredient.IngredientRepository;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -40,7 +41,6 @@ public class MealNutritionService {
         mealNutrition.setKilocalories(Math.round(kilocalories));
         return mealNutrition;
     }
-
     public MealNutrition save(MealNutrition mealNutrition){
         return mealNutritionRepository.save(mealNutrition);
     }
@@ -55,5 +55,31 @@ public class MealNutritionService {
         MealNutrition mealNutrition = mealNutritionRepository.findMealNutritionByIngredients(ingredient);
         long mealId = mealNutrition.getId();
         mealNutritionRepository.deleteingredientQuery(mealId,ingrId);
+        getMealNutritionFromIngredients(mealNutrition);
+    }
+
+    public MealNutrition findLast(){
+        return mealNutritionRepository.findFirstByOrderByIdDesc();
+    }
+
+    public MealNutrition addIngredient(Ingredient ingredient, MealNutrition mealNutrition){
+        ingredientRepository.save(ingredient);
+        List<Ingredient> ingredients;
+        if(mealNutrition.getIngredients() == null){
+            ingredients = Arrays.asList(ingredient);
+        } else {
+            ingredients = mealNutrition.getIngredients();
+            ingredients.add(ingredient);
+        }
+        mealNutrition.setIngredients(ingredients);
+        return save(mealNutrition);
+    }
+
+    public void deleteAllWithoutHistory(){
+        mealNutritionRepository.deleteAllByHistoryIsNull();
+    }
+
+    public MealNutrition getMealNutritionByIngredient(Ingredient ingredient){
+        return mealNutritionRepository.findMealNutritionByIngredients(ingredient);
     }
 }

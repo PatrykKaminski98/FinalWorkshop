@@ -37,9 +37,9 @@
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="page-header">
-            <a href=<c:url value="/meal/table/previous"/>><button type="button" class="btn btn-warning btn-rounded btn-fw">Poprzedni dzień</button></a>
+            <a href=<c:url value="/mealNutritions/table/previous"/>><button type="button" class="btn btn-warning btn-rounded btn-fw">Poprzedni dzień</button></a>
             <h3 class="page-title">${newParsedDate}</h3>
-            <a href=<c:url value="/meal/table/next"/>><button type="button" class="btn btn-warning btn-rounded btn-fw">Następny dzień</button></a>
+            <a href=<c:url value="/mealNutritions/table/next"/>><button type="button" class="btn btn-warning btn-rounded btn-fw">Następny dzień</button></a>
         </div>
         <div class="row">
             <div class="col-lg-12 stretch-card">
@@ -62,7 +62,7 @@
 
                                 <c:forEach items="${meals}" var="meal">
                                     <tr class="table-danger">
-                                        <td> ${meal.mealName}</td>
+                                        <td> ${meal.meal.name}</td>
                                         <td> ${meal.kilocalories}</td>
                                         <td> ${meal.proteins}</td>
                                         <td> ${meal.carbohydrates} </td>
@@ -93,7 +93,7 @@
                             </table>
                         </div>
                         <br>
-                        <a href="/meal/add">
+                        <a href="/mealNutritions/add">
                             <button type="submit" class="btn btn-info btn-rounded btn-fw">Dodaj posiłek</button></a>
                     </div>
 

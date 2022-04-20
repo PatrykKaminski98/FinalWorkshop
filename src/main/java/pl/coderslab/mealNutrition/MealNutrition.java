@@ -1,10 +1,12 @@
-package pl.coderslab.meal;
+package pl.coderslab.mealNutrition;
 
 import lombok.Data;
 import pl.coderslab.history.History;
 import pl.coderslab.ingredient.Ingredient;
+import pl.coderslab.meal.Meal;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -13,7 +15,8 @@ public class MealNutrition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
-    private String mealName;
+    @OneToOne
+    private Meal meal;
     private int kilocalories;
     private int proteins;
     private int carbohydrates;

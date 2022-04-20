@@ -5,6 +5,7 @@
 <fmt:setBundle basename="messages" />
 <fmt:message key="message.password" var="noPass" />
 <fmt:message key="message.username" var="noUser" />
+<fmt:message key="message.regSucc" var="regSucc" />
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -58,15 +59,10 @@
                   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </form>
               </div>
-              <c:if test="${param.regSucc == true}">
+              <c:if test="${registerSuccess == true}">
                 <div id="status">
+                  blabla
                   <spring:message code="message.regSucc">
-                  </spring:message>
-                </div>
-              </c:if>
-              <c:if test="${param.regError == true}">
-                <div id="error">
-                  <spring:message code="message.regError">
                   </spring:message>
                 </div>
               </c:if>

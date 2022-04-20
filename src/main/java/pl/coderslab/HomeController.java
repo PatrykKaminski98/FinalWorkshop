@@ -7,10 +7,9 @@ import pl.coderslab.meal.Meal_Service;
 @Controller
 public class HomeController {
 
-    @RequestMapping("/home")
-    @ResponseBody
+    @RequestMapping("/")
     public String home(){
-        return "home";
+        return "redirect:/login";
     }
 
 }
