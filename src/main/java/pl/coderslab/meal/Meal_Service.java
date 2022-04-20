@@ -45,7 +45,15 @@ public class Meal_Service {
     }
 
     public Meal findById(long id){
-        return mealRepository.findById(id);
+        return mealRepository.findMealById(id);
+    }
+
+    public void deleteProduct(long mealId, long productId){
+        mealRepository.deleteByIdAndProductsIdQuery(mealId, productId);
+    }
+
+    public void addProduct(long mealId, long productId){
+        mealRepository.addProductToMeal(mealId, productId);
     }
 
 

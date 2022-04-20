@@ -43,13 +43,13 @@ public class ProductController {
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable long id){
-            productRepository.delete(productRepository.findById(id));
+            productRepository.delete(productRepository.findProductById(id));
         return "redirect:/product/all";
     }
 
     @GetMapping("/update/{id}")
     public String update(Model model, @PathVariable long id){
-        model.addAttribute("product", productRepository.findById(id));
+        model.addAttribute("product", productRepository.findProductById(id));
         return "/product/product_edit";
     }
 

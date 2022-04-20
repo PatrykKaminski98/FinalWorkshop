@@ -18,4 +18,9 @@ public class UserGoalsService {
     public void save(UserGoals userGoals){
         userGoalsRepository.save(userGoals);
     }
+
+    public void firstSave(User user){
+        UserGoals userGoals = new UserGoals();
+        userGoals.setUser(user);
+        save(userGoals);}
 }

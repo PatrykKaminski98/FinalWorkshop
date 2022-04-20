@@ -12,7 +12,7 @@
                         <h4 class="card-title">Edycja składnika: ${ingredient.product.name} (${ingredient.product.producent})</h4>
                         <form:form method="post" action="/ingredient/edit_ing" modelAttribute="ingredient" class="forms-sample">
                             <form:hidden path="id"/>
-                            <form:hidden path="product"/>
+                            <input type="hidden" value="${ingredient.product.id}" name="productId">
                             <div class="form-group">
                                 <form:label path="productQuantity">Ilość składnika: (g)</form:label>
                                 <form:input path="productQuantity" type="number" class="form-control"/>

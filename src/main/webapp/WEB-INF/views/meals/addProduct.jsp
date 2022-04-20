@@ -11,7 +11,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Baza posiłków</h4>
+                        <h4 class="card-title">Dodaj produkt</h4>
                         <div class="form-group">
                             <input type="text" class="form-control" id="search_input" placeholder="Wyszukaj po nazwie">
                         </div>
@@ -21,24 +21,33 @@
                                 <thead>
                                 <tr>
                                     <th> Nazwa </th>
-                                    <th> Akcja </th>
+                                    <th> Producent </th>
+                                    <th> kcal/100g </th>
+                                    <th> białko/100g </th>
+                                    <th> węglowodany/100g </th>
+                                    <th> tłuszcze/100g </th>
+                                    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;akcja </th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${meals}" var="meal">
+                                <c:forEach items="${products}" var="product">
                                     <tr>
-                                        <td  id="product"> ${meal.name}</td>
+                                        <td  id="product"> ${product.name}</td>
+                                        <td> ${product.producent}</td>
+                                        <td> &nbsp;&nbsp;${product.kilocalories}</td>
+                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;${product.proteins}</td>
+                                        <td>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${product.carbohydrates}</td>
+                                        <td> ${product.fats}</td>
                                         <td>
                                             <div class="template-demo">
-                                                <a href=<c:url value="/meal/details/${meal.id}"/>> <button type="button" class="btn btn-outline-warning btn-icon-text"> Szczegóły </button></a>
+                                                <a href=<c:url value="/meal/productAdd/${mealId}/${product.id}"/>><button type="button" class="btn btn-outline-success btn-icon-text"> Dodaj </button></a>
                                             </div>
                                         </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
-                        </div><br>
-                        <a href=<c:url value="/meal/add"/>><button type="button" class="btn btn-inverse-primary btn-fw">Dodaj posiłek</button></a>
+                        </div>
                     </div>
                 </div>
             </div>

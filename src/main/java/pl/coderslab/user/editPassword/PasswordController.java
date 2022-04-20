@@ -24,7 +24,7 @@ public class PasswordController {
 
     @GetMapping("/edit")
     public String editPassword() {
-        return "/admin/editPassword";
+        return "/user/editPassword";
     }
 
     @PostMapping("/edit")

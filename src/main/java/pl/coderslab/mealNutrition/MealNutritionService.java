@@ -82,4 +82,15 @@ public class MealNutritionService {
     public MealNutrition getMealNutritionByIngredient(Ingredient ingredient){
         return mealNutritionRepository.findMealNutritionByIngredients(ingredient);
     }
+
+    public MealNutrition getById(long id){
+       return mealNutritionRepository.findMealNutritionById(id);
+    }
+
+    public void addIngredientToMeal(long mealId, Ingredient ingredient){
+        MealNutrition mealNutrition = getById(mealId);
+        addIngredient(ingredient, mealNutrition);
+        mealNutrition = getMealNutritionFromIngredients(mealNutrition);
+        save(mealNutrition);
+    }
 }

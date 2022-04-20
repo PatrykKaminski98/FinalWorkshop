@@ -20,6 +20,7 @@
                                     <i class="mdi mdi-upload btn-icon-prepend"></i> Dodaj produkt </button>
                                 <br>
                             </div>
+                            <input type="hidden" value="${meal.id}" name="mealId">
                         </form:form>
                     </div>
                 </div>
@@ -52,6 +53,7 @@
                                 <i class="mdi mdi-upload btn-icon-prepend"></i>Edytuj posiłek</button>
                         </a>
                     </div>
+
 
                 </div>
             </div>

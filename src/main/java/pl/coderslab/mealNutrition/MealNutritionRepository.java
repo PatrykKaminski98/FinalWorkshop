@@ -13,6 +13,8 @@ import java.util.List;
 
 public interface MealNutritionRepository extends JpaRepository<MealNutrition, Long> {
 
+    MealNutrition findMealNutritionById(long id);
+
     @Query("select mn from MealNutrition mn where mn.history in (:hList)")
     List<MealNutrition> findAllByHistoryListQuery(@Param("hList")List<History> historyList);
 
@@ -20,7 +22,7 @@ public interface MealNutritionRepository extends JpaRepository<MealNutrition, Lo
 
     MealNutrition findMealNutritionByIngredients(Ingredient ingredient);
 
-    @Query(value = "insert into meal_nutrition-ingredients (meal_nutrition_id, ingredients_id) VALUES (?1, ?2)",nativeQuery = true)
+    @Query(value = "insert into meal_nutrition_ingredients (meal_nutrition_id, ingredients_id) VALUES (?1, ?2)",nativeQuery = true)
     void addIngredientQuery(long ingredient_id, long mealNutrition_id);
 
 

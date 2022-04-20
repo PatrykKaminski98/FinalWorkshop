@@ -2,15 +2,14 @@ package pl.coderslab.user;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import pl.coderslab.errors.UserAlreadyExistException;
 import pl.coderslab.user.login.Role;
 import pl.coderslab.user.login.RoleRepository;
+import pl.coderslab.user.user_goals.UserGoals;
+import pl.coderslab.user.user_goals.UserGoalsService;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {

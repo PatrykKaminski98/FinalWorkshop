@@ -4,15 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.errors.UserAlreadyExistException;
 import pl.coderslab.user.User;
 import pl.coderslab.user.UserDto;
 import pl.coderslab.user.UserService;
+import pl.coderslab.user.user_goals.UserGoalsService;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/register")
@@ -20,8 +19,11 @@ public class RegisterController {
 
     private final UserService userService;
 
-    public RegisterController(UserService userService) {
+    private final UserGoalsService userGoalsService;
+
+    public RegisterController(UserService userService, UserGoalsService userGoalsService) {
         this.userService = userService;
+        this.userGoalsService = userGoalsService;
     }
 
     @GetMapping("/form")
@@ -39,6 +41,8 @@ public class RegisterController {
         }
         try {
             User registered = userService.registerNewUserAccount(userDto);
+            userGoalsService.firstSave(registered);
+
         } catch (UserAlreadyExistException uaeEx) {
             result.addError(new FieldError("user","email", "Taki email już istnieje"));
         }

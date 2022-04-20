@@ -22,7 +22,7 @@ public class HistoryController {
         History history = historyService.findById(id);
         mealNutritionService.deleteByHistory(history);
         historyService.delete(history);
-        return "redirect:/meal/table/" + history.getDate().toString();
+        return "redirect:/mealNutritions/table/" + history.getDate().toString();
     }
 
 

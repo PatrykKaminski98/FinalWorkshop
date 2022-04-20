@@ -43,7 +43,8 @@ public class IngredientService {
     void editIngredient(Ingredient ingredient){
         ingredientRepository.save(ingredient);
         MealNutrition mealNutrition = mealNutritionService.getMealNutritionByIngredient(ingredient);
-        mealNutritionService.getMealNutritionFromIngredients(mealNutrition);
+        mealNutrition = mealNutritionService.getMealNutritionFromIngredients(mealNutrition);
+        mealNutritionService.save(mealNutrition);
     }
 
 

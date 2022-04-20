@@ -48,9 +48,9 @@ public class UserGoalsController {
     }
 
     @PostMapping("/user/goals")
-    public String editGoalsPost(UserGoals userGoals, HttpSession session) {
+    public String editGoalsPost(UserGoals userGoals) {
         userGoalsService.save(userGoals);
-        return "redirect:/user/dashboard";
+        return "redirect:/dashboard";
     }
 
     @GetMapping("/dashboard")

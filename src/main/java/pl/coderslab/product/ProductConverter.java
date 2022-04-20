@@ -16,9 +16,4 @@ public class ProductConverter implements Converter<String, Product> {
     public Product convert(String source) {
         return productRepository.findByName(source);
     }
-
-    @Override
-    public <U> Converter<String, U> andThen(Converter<? super Product, ? extends U> after) {
-        return Converter.super.andThen(after);
-    }
 }

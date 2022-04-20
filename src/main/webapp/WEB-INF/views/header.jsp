@@ -11,11 +11,31 @@
     <!-- plugins:css -->
     <link rel="stylesheet" href=<c:url value="/resources/assets/vendors/mdi/css/materialdesignicons.min.css"/> type="text/css">
     <link rel="stylesheet" href=<c:url value="/resources/assets/vendors/css/vendor.bundle.base.css"/> type="text/css">
+    <!-- plugins:js -->
+    <script src=<c:url value="/resources/assets/vendors/js/vendor.bundle.base.js"/>></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="<c:url value="/resources/assets/vendors/select2/select2.min.js"/>"></script>
+    <script src="<c:url value="/resources/assets/vendors/typeahead.js/typeahead.bundle.min.js"/>"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src=<c:url value="/resources/assets/js/off-canvas.js"/>></script>
+    <script src=<c:url value="/resources/assets/js/hoverable-collapse.js"/>></script>
+    <script src=<c:url value="/resources/assets/js/misc.js"/>></script>
+    <script src=<c:url value="/resources/assets/js/settings.js"/>></script>
+    <script src=<c:url value="/resources/assets/js/todolist.js"/>></script>
+
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="<c:url value="/resources/assets/js/file-upload.js"/>"></script>
+    <script src="<c:url value="/resources/assets/js/typeahead.js"/>"></script>
+    <script src="<c:url value="/resources/assets/js/select2.js"/>"></script>
+    <!-- End custom js for this page -->
 
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="/resources/assets/vendors/select2/select2.min.css">
-    <link rel="stylesheet" href="/resources/assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <link rel="stylesheet" href=<c:url value="/resources/assets/vendors/select2/select2.min.css"/>>
+    <link rel="stylesheet" href=<c:url value="/resources/assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css"/>>
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
@@ -79,38 +99,27 @@
 
 
             <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#product" aria-expanded="false" aria-controls="product">
+                <a class="nav-link" data-toggle="collapse" href="#products" aria-expanded="false" aria-controls="products">
               <span class="menu-icon">
                 <i class="mdi mdi-food"></i>
               </span>
                     <span class="menu-title">Produkty</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse" id="product">
+                <div class="collapse" id="products">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href=<c:url value="/product/all"/>> Baza produktów </a></li>
                         <li class="nav-item"> <a class="nav-link" href=<c:url value="/product/add"/>> Dodaj produkt </a></li>
                     </ul>
                 </div>
             </li>
-
             <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#auth2" aria-expanded="false" aria-controls="auth2">
+                <a class="nav-link" href=<c:url value="/meal/table"/>>
               <span class="menu-icon">
-                <i class="mdi mdi-security"></i>
+                <i class=" mdi mdi-format-list-bulleted "></i>
               </span>
-                    <span class="menu-title">User Pages</span>
-                    <i class="menu-arrow"></i>
+                    <span class="menu-title"> Lista posiłków </span>
                 </a>
-                <div class="collapse" id="auth2">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="/resources/pages/samples/blank-page.html"> Blank Page </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="/resourcespages/samples/error-404.html"> 404 </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="/resources/pages/samples/error-500.html"> 500 </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="/resources/pages/samples/login.html"> Login </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="/resources/pages/samples/register.html"> Register </a></li>
-                    </ul>
-                </div>
             </li>
 
         </ul>

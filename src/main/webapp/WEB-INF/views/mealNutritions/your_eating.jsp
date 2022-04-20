@@ -86,7 +86,8 @@
                                     </tr>
                                 </c:forEach>
                                     <tr>
-                                        <td><button type="button" class="btn btn-primary btn-rounded btn-fw">Dodaj produkt</button></td>
+                                        <td><a href=<c:url value="/ingredient/addToMeal/${meal.id}"/>>
+                                        <button type="button" class="btn btn-primary btn-rounded btn-fw">Dodaj produkt</button></a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
