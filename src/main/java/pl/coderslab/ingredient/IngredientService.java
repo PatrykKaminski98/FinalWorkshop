@@ -1,6 +1,7 @@
 package pl.coderslab.ingredient;
 
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.coderslab.history.HistoryRepository;
 import pl.coderslab.mealNutrition.MealNutrition;
@@ -13,59 +14,37 @@ import java.util.List;
 
 
 @Service
+@AllArgsConstructor
 public class IngredientService {
 
     private final IngredientRepository ingredientRepository;
-    private final HistoryRepository historyRepository;
 
     private final MealNutritionRepository mealNutritionRepository;
 
     private final MealNutritionService mealNutritionService;
 
-
-    public IngredientService(IngredientRepository ingredientRepository, HistoryRepository historyRepository, MealNutritionRepository mealNutritionRepository, MealNutritionService mealNutritionService) {
-        this.ingredientRepository = ingredientRepository;
-        this.historyRepository = historyRepository;
-        this.mealNutritionRepository = mealNutritionRepository;
-        this.mealNutritionService = mealNutritionService;
-    }
-
-    public void delete(long ingredients_id){
-        Ingredient ingredient = ingredientRepository.findById(ingredients_id);
+    public void delete(long ingredientId){
+        Ingredient ingredient = ingredientRepository.findById(ingredientId);
         mealNutritionService.deleteIngredient(ingredient);
-        ingredientRepository.deleteIngredientById(ingredients_id);
+        ingredientRepository.deleteIngredientById(ingredientId);
     }
 
-    public Ingredient findById(long ingredient_id){
-        return ingredientRepository.findById(ingredient_id);
+    public Ingredient findById(long ingredientId){
+        return ingredientRepository.findById(ingredientId);
     }
 
     void editIngredient(Ingredient ingredient){
         ingredientRepository.save(ingredient);
         MealNutrition mealNutrition = mealNutritionService.getMealNutritionByIngredient(ingredient);
-        mealNutrition = mealNutritionService.getMealNutritionFromIngredients(mealNutrition);
+        mealNutritionService.getMealNutritionFromIngredients(mealNutrition);
         mealNutritionService.save(mealNutrition);
     }
 
-
-    public List<Ingredient> getAllIngredientsByMealNutrition(MealNutrition mealNutrition){
-        return ingredientRepository.findAllByMealNutritionQuery(mealNutrition);
-    }
-
-    public List<List<Ingredient>> getListsOfIngredients(List<MealNutrition> mealNutritions){
-        List<List<Ingredient>> result = new ArrayList<>();
-        mealNutritions.forEach(meal -> {
-            result.add(getAllIngredientsByMealNutrition(meal));
-        });
-        return result;
-    }
-
     public LocalDate dateFromIngredient(Ingredient ingredient){
-        MealNutrition mealNutrition = mealNutritionRepository.findMealNutritionByIngredients(ingredient);
+        long mealNutritionId = mealNutritionRepository.findMealNutritionIdByIngredientId(ingredient.getId());
+        MealNutrition mealNutrition = mealNutritionRepository.findMealNutritionById(mealNutritionId);
         return mealNutrition.getHistory().getDate();
     }
-
-
 
     public Ingredient save(Ingredient ingredient){
         return ingredientRepository.save(ingredient);

@@ -18,16 +18,10 @@ public class HistoryController {
     }
 
     @RequestMapping("delete_meal/{id}")
-    public String deleteMeal(@PathVariable long id){
+    public String deleteMeal(@PathVariable long id) {
         History history = historyService.findById(id);
         mealNutritionService.deleteByHistory(history);
         historyService.delete(history);
         return "redirect:/mealNutritions/table/" + history.getDate().toString();
     }
-
-
-
-
-
-
 }

@@ -19,10 +19,6 @@
                         <form:input path="name"  class="form-control"  placeholder="Nazwa"/>
                       </div>
                       <div class="form-group">
-                        <form:label path="producent">Producent</form:label>
-                        <form:input path="producent"  class="form-control"  placeholder="Producent"/>
-                      </div>
-                      <div class="form-group">
                         <form:label path="kilocalories">Kalorie: (100g)</form:label>
                         <form:input path="kilocalories"  type="number" class="form-control"  placeholder="kcal"/>
                       </div>
@@ -43,7 +39,7 @@
                         <i class="mdi mdi-upload btn-icon-prepend"></i> Zapisz zmiany </button>
                       <a href=<c:url value="/product/all"/> <button type="button" class="btn btn-danger btn-icon-text"> Anuluj </button></a>
                       <br>
-                      <form:errors path="name" cssClass="text-info"/><br><form:errors path="producent" cssClass="text-info"/>
+                      <form:errors path="name" cssClass="text-info"/><br>
                     </div>
 
                     </form:form>

@@ -5,7 +5,6 @@
 <fmt:setBundle basename="messages" />
 <fmt:message key="message.password" var="noPass" />
 <fmt:message key="message.username" var="noUser" />
-<fmt:message key="message.regSucc" var="regSucc" />
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -60,13 +59,8 @@
                 </form>
               </div>
               <c:if test="${registerSuccess == true}">
-                <div id="status">
-                  blabla
-                  <spring:message code="message.regSucc">
-                  </spring:message>
-                </div>
+               <p class="text-info">Zarejestrowano poprawnie. Możesz się zalogować</p>
               </c:if>
-
             </div>
           </div>
           <!-- content-wrapper ends -->

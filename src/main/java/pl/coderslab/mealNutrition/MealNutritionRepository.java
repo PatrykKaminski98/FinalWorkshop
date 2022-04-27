@@ -20,16 +20,12 @@ public interface MealNutritionRepository extends JpaRepository<MealNutrition, Lo
 
     MealNutrition findMealNutritionByHistory(History history);
 
-    MealNutrition findMealNutritionByIngredients(Ingredient ingredient);
-
-    @Query(value = "insert into meal_nutrition_ingredients (meal_nutrition_id, ingredients_id) VALUES (?1, ?2)",nativeQuery = true)
-    void addIngredientQuery(long ingredient_id, long mealNutrition_id);
-
-
+    @Query(value = "SELECT meal_nutrition_id FROM meal_nutrition_ingredients WHERE ingredients_id = ?1", nativeQuery = true)
+    long findMealNutritionIdByIngredientId(long ingredientId);
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM meal_nutrition_ingredients WHERE meal_nutrition_id = ?1 AND ingredients_id = ?2", nativeQuery = true)
-    public void deleteingredientQuery(long mealId, long ingrId);
+    void deleteingredientQuery(long mealId, long ingrId);
 
     MealNutrition findFirstByOrderByIdDesc();
 

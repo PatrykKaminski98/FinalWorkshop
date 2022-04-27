@@ -50,11 +50,11 @@ public class MealNutritionService {
         mealNutritionRepository.delete(mealNutritionByHistory);
     }
 
+
     public void deleteIngredient(Ingredient ingredient){
-        Long ingrId = ingredient.getId();
-        MealNutrition mealNutrition = mealNutritionRepository.findMealNutritionByIngredients(ingredient);
-        long mealId = mealNutrition.getId();
-        mealNutritionRepository.deleteingredientQuery(mealId,ingrId);
+        long mealNutritionId = mealNutritionRepository.findMealNutritionIdByIngredientId(ingredient.getId());
+        MealNutrition mealNutrition = mealNutritionRepository.findMealNutritionById(mealNutritionId);
+        mealNutritionRepository.deleteingredientQuery(mealNutrition.getId(), ingredient.getId());
         getMealNutritionFromIngredients(mealNutrition);
     }
 
@@ -80,7 +80,8 @@ public class MealNutritionService {
     }
 
     public MealNutrition getMealNutritionByIngredient(Ingredient ingredient){
-        return mealNutritionRepository.findMealNutritionByIngredients(ingredient);
+        long mealNutritionId = mealNutritionRepository.findMealNutritionIdByIngredientId(ingredient.getId());
+        return mealNutritionRepository.findMealNutritionById(mealNutritionId);
     }
 
     public MealNutrition getById(long id){

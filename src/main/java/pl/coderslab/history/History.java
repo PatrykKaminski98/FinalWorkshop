@@ -1,12 +1,10 @@
 package pl.coderslab.history;
 
 import lombok.Data;
-import pl.coderslab.ingredient.Ingredient;
-import pl.coderslab.user.User;
-import pl.coderslab.meal.Meal;
+import pl.coderslab.account.appUser.User;
+
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Data
@@ -17,5 +15,4 @@ public class History {
     @ManyToOne
     private User user;
     private LocalDate date;
-
 }
