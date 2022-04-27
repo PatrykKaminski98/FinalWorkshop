@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../header.jsp"/>
+
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -21,7 +22,6 @@
                         <thead>
                           <tr>
                             <th> Nazwa </th>
-                            <th> Producent </th>
                             <th> kcal/100g </th>
                             <th> białko/100g </th>
                             <th> węglowodany/100g </th>
@@ -33,7 +33,6 @@
                         <c:forEach items="${products}" var="product">
                           <tr>
                             <td  id="product"> ${product.name}</td>
-                            <td> ${product.producent}</td>
                             <td> &nbsp;&nbsp;${product.kilocalories}</td>
                             <td> &nbsp;&nbsp;&nbsp;&nbsp;${product.proteins}</td>
                             <td>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${product.carbohydrates}</td>
@@ -55,6 +54,31 @@
               </div>
             </div>
           </div>
-          <script type="text/javascript" src=<c:url value="/resources/assets/js/search_bar.js"/>/>
+          <script type="text/javascript">
+
+            const searchBarInput = document.getElementById("search_input");
+            const product = document.querySelectorAll("#product");
+
+            searchBarInput.addEventListener("input", function (e) {
+
+              if (searchBarInput.value === "") {
+                product.forEach(function (element) {
+                  element.parentElement.style.removeProperty("display");
+                });
+              } else {
+                product.forEach(function (element) {
+                  let input = element.innerText.toLowerCase();
+                  if (!input.includes(searchBarInput.value)) {
+                    element.parentElement.style.display = 'none';
+                  } else {
+                    element.parentElement.style.removeProperty("display");
+                  }
+                });
+              }
+
+            });
+
+          </script>
+         <!-- <script type="text/javascript" src=<c:url value="/resources/assets/js/search_bar.js"/>/> -->
           <!-- content-wrapper ends -->
             <jsp:include page="../footer.jsp"/>

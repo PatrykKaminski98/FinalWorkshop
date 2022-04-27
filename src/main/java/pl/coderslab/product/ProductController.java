@@ -3,6 +3,7 @@ package pl.coderslab.product;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -33,6 +34,11 @@ public class ProductController {
 
     @PostMapping("/add")
     public String addPost(@Valid Product product, BindingResult result, Model model){
+        boolean nameIsTaken = productRepository.findByName(product.getName()) != null;
+        if(nameIsTaken) {
+            FieldError fieldError = new FieldError("product", "name", "Produkt o takiej nazwie już istnieje");
+            result.addError(fieldError);
+        }
         if(result.hasErrors()){
             model.addAttribute("product", product);
             return "/product/product_add";
@@ -43,7 +49,7 @@ public class ProductController {
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable long id){
-            productRepository.delete(productRepository.findProductById(id));
+        productRepository.delete(productRepository.findProductById(id));
         return "redirect:/product/all";
     }
 

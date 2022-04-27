@@ -15,8 +15,6 @@ public interface MealRepository extends JpaRepository<Meal, Long> {
     @Query(value = "insert into meal_products values (?1, ?2)", nativeQuery = true)
     void addProductQuery(long mealId, long productId);
 
-    Meal findByName(String name);
-
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM meal_products WHERE meal_id =?1 AND products_id = ?2", nativeQuery = true)
@@ -27,4 +25,6 @@ public interface MealRepository extends JpaRepository<Meal, Long> {
     @Transactional
     @Query(value = "INSERT INTO meal_products VALUES (?1, ?2)", nativeQuery = true)
     void addProductToMeal(long mealId, long productId);
+
+    Meal findFirstByOrderByIdDesc();
 }

@@ -38,6 +38,6 @@ public class Ingredient {
         kilocalories = product.getKilocalories() * productQuantity/100;
         proteins = product.getProteins() * productQuantity/100;
         carbohydrates = product.getCarbohydrates() * productQuantity/100;
-        fats =product.getFats() * productQuantity/100;
+        fats = product.getFats() * productQuantity/100;
     }
 }
