@@ -5,13 +5,10 @@
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [Screenshots](#screenshots)
-* [Setup](#setup)
 * [Usage](#usage)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
-* [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
-<!-- * [License](#license) -->
 
 
 ## General Information
@@ -47,10 +44,34 @@ List the ready features here:
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 ## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
+In order to run the application in the version without email verification, the repository must be encapsulated and opened in the IDE.
+Create SQLDatabase with name:finalWorkshop.
+
+Then run the main method of the class
+`src / main / java / en / coderslab / SpringbootApplication.java`
+
+Enter the following address in the browser: `http://localhost:8080/create-user`
+
+the user "admin" has been created. His login details are:
+user name: admin
+password: admin
+
+Now we can log in and use the application! ;)
+
 
 `write-your-code-here`
+
+To use the version with email verification, you must set up the email configuration.
+the default configuration is for Gmail
+![Example screenshot](./img/mailConfiguration.png)
+We can change it in class
+`src/main/java/pl/coderslab/account/email/MailConfiguration.java`
+
+And in class
+`src/main/java/pl/coderslab/account/email/MailAuthenticator.java`
+
+should enter authentication to email
+![Example screenshot](./img/mailAuhentication.png)
 
 
 ## Project Status
