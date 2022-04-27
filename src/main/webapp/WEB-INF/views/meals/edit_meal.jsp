@@ -34,14 +34,12 @@
                                 <thead>
                                 <tr>
                                     <th>Produkt</th>
-                                    <th>Producent</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${meal.products}" var="product">
                                     <tr>
                                         <td>${product.name}</td>
-                                        <td>${product.producent}</td>
 
                                     </tr>
                                 </c:forEach>

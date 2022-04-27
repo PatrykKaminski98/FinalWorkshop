@@ -13,14 +13,6 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<String> getAllProductsNames(){
-        List<Product> all = productRepository.findAll();
-        return all.stream()
-                .map(product -> product.getName())
-                .collect(Collectors.toList());
-    }
-
-
     public List<Product> getAllProducts(){
         return productRepository.findAll();
     }

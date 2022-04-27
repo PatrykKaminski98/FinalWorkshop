@@ -9,7 +9,7 @@
             <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Edycja składnika: ${ingredient.product.name} (${ingredient.product.producent})</h4>
+                        <h4 class="card-title">Edycja składnika: ${ingredient.product.name}</h4>
                         <form:form method="post" action="/ingredient/edit_ing" modelAttribute="ingredient" class="forms-sample">
                             <form:hidden path="id"/>
                             <input type="hidden" value="${ingredient.product.id}" name="productId">

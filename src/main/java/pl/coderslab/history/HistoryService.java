@@ -1,7 +1,9 @@
 package pl.coderslab.history;
 
 import org.springframework.stereotype.Service;
+import pl.coderslab.account.appUser.User;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -10,20 +12,18 @@ public class HistoryService {
     private final HistoryRepository historyRepository;
 
     public HistoryService(HistoryRepository historyRepository) {
-
         this.historyRepository = historyRepository;
     }
 
 
-    public History save(History history){
+    public History createAndSaveHistory(LocalDate date, User user){
+        History history = new History();
+        history.setUser(user);
+        history.setDate(date);
+
         return historyRepository.save(history);
     }
 
-    /*
-    public LocalDate findDatebyIngredient(long ingredient_id){
-        History history = historyRepository.findHistoryByIngredientsId(ingredient_id);
-        return history.getDate();
-    }*/
 
     public void delete(History history){
         historyRepository.delete(history);

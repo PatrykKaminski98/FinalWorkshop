@@ -18,7 +18,6 @@
                                 <thead>
                                 <tr>
                                     <th> Nazwa </th>
-                                    <th> Producent </th>
                                     <th> kcal/100g </th>
                                     <th> białko/100g </th>
                                     <th> węglowodany/100g </th>
@@ -30,7 +29,6 @@
                                 <c:forEach items="${meal.products}" var="product">
                                     <tr>
                                         <td> ${product.name}</td>
-                                        <td> ${product.producent}</td>
                                         <td> &nbsp;&nbsp;${product.kilocalories}</td>
                                         <td> &nbsp;&nbsp;&nbsp;&nbsp;${product.proteins}</td>
                                         <td>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${product.carbohydrates}</td>

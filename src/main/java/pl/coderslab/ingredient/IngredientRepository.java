@@ -15,7 +15,4 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
     void deleteIngredientById(long id);
 
     Ingredient findById(long id);
-
-    @Query(value = "SELECT mn.ingredients from MealNutrition mn WHERE mn = ?1")
-    List<Ingredient> findAllByMealNutritionQuery(MealNutrition mealNutrition);
 }

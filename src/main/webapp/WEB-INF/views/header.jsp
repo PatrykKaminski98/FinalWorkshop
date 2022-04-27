@@ -11,11 +11,14 @@
     <!-- plugins:css -->
     <link rel="stylesheet" href=<c:url value="/resources/assets/vendors/mdi/css/materialdesignicons.min.css"/> type="text/css">
     <link rel="stylesheet" href=<c:url value="/resources/assets/vendors/css/vendor.bundle.base.css"/> type="text/css">
+
+    <link rel="stylesheet" href=<c:url value="/resources/assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css"/>>
+    <link rel="stylesheet" href=<c:url value="/resources/assets/vendors/select2/select2.min.css"/>>
     <!-- plugins:js -->
     <script src=<c:url value="/resources/assets/vendors/js/vendor.bundle.base.js"/>></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
-    <script src="<c:url value="/resources/assets/vendors/select2/select2.min.js"/>"></script>
+
     <script src="<c:url value="/resources/assets/vendors/typeahead.js/typeahead.bundle.min.js"/>"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
@@ -29,13 +32,13 @@
     <!-- Custom js for this page -->
     <script src="<c:url value="/resources/assets/js/file-upload.js"/>"></script>
     <script src="<c:url value="/resources/assets/js/typeahead.js"/>"></script>
-    <script src="<c:url value="/resources/assets/js/select2.js"/>"></script>
+
     <!-- End custom js for this page -->
+    <script src="<c:url value="/resources/assets/vendors/select2/select2.min.js"/>"></script>
+    <script src="<c:url value="/resources/assets/js/select2.js"/>"></script>
 
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href=<c:url value="/resources/assets/vendors/select2/select2.min.css"/>>
-    <link rel="stylesheet" href=<c:url value="/resources/assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css"/>>
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
@@ -52,8 +55,8 @@
     <!-- partial:../../partials/_sidebar.html -->
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-            <a class="sidebar-brand brand-logo" href=<c:url value="/dashboard"/>><img src=<c:url value="/resources/assets/images/logo.svg"/> alt="logo" /></a>
-            <a class="sidebar-brand brand-logo-mini" href=<c:url value="/dashboard"/>><img src=<c:url value="/resources/assets/images/logo-mini.svg"/> alt="logo" /></a>
+            <a class="sidebar-brand brand-logo" href=<c:url value="/dashboard"/>><h3 style="color: #ff3916">Policzona Micha!</h3></a>
+            <a class="sidebar-brand brand-logo-mini" href=<c:url value="/dashboard"/>> </a>
         </div>
         <ul class="nav">
             <li class="nav-item profile">
