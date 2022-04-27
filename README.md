@@ -71,7 +71,9 @@ And in class
 `src/main/java/pl/coderslab/account/email/MailAuthenticator.java`
 
 should enter authentication to email
-![Example screenshot](./img/mailAuhentication.png)
+![Example screenshot](./img/mailAuthentication.png)
+
+Now everythink is fine. U can register new users by form and confirm their account by clicking in link in email
 
 
 ## Project Status
