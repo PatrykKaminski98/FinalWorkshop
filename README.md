@@ -62,7 +62,7 @@ Now we can log in and use the application! ;)
 `write-your-code-here`
 
 To use the version with email verification, you must set up the email configuration.
-the default configuration is for Gmail
+The default configuration is for Gmail
 ![Example screenshot](./img/mailConfiguration.png)
 We can change it in class
 `src/main/java/pl/coderslab/account/email/MailConfiguration.java`
