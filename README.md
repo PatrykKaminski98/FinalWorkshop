@@ -20,15 +20,16 @@
 
 ## Technologies Used
 - Java
+- Spring Boot
 - Spring MVC
 - Spring Data JPA
 - Spring Security
+- Hibernate
 - MySql
 - JavaScript
 
 
 ## Features
-List the ready features here:
 - calculation of nutritional values
 - adding products
 - adding meals
@@ -41,7 +42,6 @@ List the ready features here:
 ## Screenshots
 ![Example screenshot](./img/foodTable.png)
 ![Example screenshot](./img/userGoals.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
 
 ## Usage
 In order to run the application in the version without email verification, the repository must be encapsulated and opened in the IDE.
