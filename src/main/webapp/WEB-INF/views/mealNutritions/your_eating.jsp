@@ -68,7 +68,7 @@
                                         <td> ${meal.carbohydrates} </td>
                                         <td> ${meal.fats} </td>
                                         <td></td>
-                                        <td><a href=<c:url value="/history/delete_meal/${meal.history.id}"/>><button type="button" class="btn btn-dark btn-rounded btn-fw">Usuń</button></a></td>
+                                        <td><a href=<c:url value="/mealNutritions/delete_meal/${meal.id}"/>><button type="button" class="btn btn-dark btn-rounded btn-fw">Usuń</button></a></td>
                                     </tr>
 
                                 <c:forEach items="${meal.ingredients}" var="ingredient">
