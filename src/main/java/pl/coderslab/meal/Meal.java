@@ -1,17 +1,15 @@
 package pl.coderslab.meal;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import pl.coderslab.product.Product;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
-@Data
+@ToString
+@RequiredArgsConstructor
 @Getter
 @Setter
 public class Meal {
@@ -24,5 +22,14 @@ public class Meal {
 
     @ManyToMany
     @NotEmpty(message = "Posiłek musi zawierać minimum jeden produkt")
+    @ToString.Exclude
     private List<Product> products;
+
+    public void addProduct(Product product) {
+        this.products.add(product);
+    }
+
+    public void removeProduct(Product product) {
+        this.products.remove(product);
+    }
 }

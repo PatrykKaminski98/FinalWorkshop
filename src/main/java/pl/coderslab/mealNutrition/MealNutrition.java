@@ -1,12 +1,11 @@
 package pl.coderslab.mealNutrition;
 
 import lombok.Data;
-import pl.coderslab.history.History;
+import pl.coderslab.account.appUser.User;
 import pl.coderslab.ingredient.Ingredient;
 import pl.coderslab.meal.Meal;
-
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -21,8 +20,19 @@ public class MealNutrition {
     private int proteins;
     private int carbohydrates;
     private int fats;
-    @OneToOne
-    private History history;
-    @OneToMany
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
+    private LocalDate date;
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Ingredient> ingredients;
+
+    public void addIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
+    }
+
+    public void removeIngredient(Ingredient ingredient) {
+        this.ingredients.remove(ingredient);
+    }
+
+
 }

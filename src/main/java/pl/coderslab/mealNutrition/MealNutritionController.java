@@ -7,13 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.account.appUser.CurrentUser;
-import pl.coderslab.history.History;
-import pl.coderslab.history.HistoryService;
 import pl.coderslab.ingredient.Ingredient;
 import pl.coderslab.meal.Meal;
-import pl.coderslab.meal.MealService;
+import pl.coderslab.meal.MealRepository;
 import pl.coderslab.product.Product;
-import pl.coderslab.product.ProductService;
+import pl.coderslab.product.ProductRepository;
 import pl.coderslab.account.appUser.User;
 
 import javax.validation.Valid;
@@ -28,26 +26,27 @@ import java.util.List;
 public class MealNutritionController {
 
     private LocalDate date;
-    private final MealService mealService;
 
-    private final HistoryService historyService;
+    private final MealRepository mealRepository;
     private final MealNutritionService mealNutritionService;
-    private final ProductService productService;
+    private final ProductRepository productRepository;
 
-    public MealNutritionController(MealService mealService, HistoryService historyService, MealNutritionService mealNutritionService, ProductService productService) {
-        this.mealService = mealService;
-        this.historyService = historyService;
+    private final MealNutritionRepository mealNutritionRepository;
+
+    public MealNutritionController(MealRepository mealRepository, MealNutritionService mealNutritionService, ProductRepository productRepository, MealNutritionRepository mealNutritionRepository) {
+        this.mealRepository = mealRepository;
         this.mealNutritionService = mealNutritionService;
-        this.productService = productService;
+        this.productRepository = productRepository;
+        this.mealNutritionRepository = mealNutritionRepository;
     }
 
     @ModelAttribute("products")
     public List<Product> products(){
-        return productService.getAllProducts();
+        return productRepository.findAll();
     }
 
     @ModelAttribute("meals")
-    public List<Meal> meals(){return mealService.findAll();}
+    public List<Meal> meals(){return mealRepository.findAll();}
 
     @GetMapping("/add")
     public String addStart(Model model)
@@ -58,13 +57,13 @@ public class MealNutritionController {
     @PostMapping("/add")
     public String addMealPost(MealNutrition mealNutrition)
     {
-        mealNutritionService.save(mealNutrition);
+        mealNutritionRepository.save(mealNutrition);
         return "redirect:/mealNutritions/ingredient";
     }
     @GetMapping("/ingredient")
     public String ingredientGet(Model model)
     {
-        MealNutrition mealNutrition =mealNutritionService.findLast();
+        MealNutrition mealNutrition = mealNutritionRepository.findFirstByOrderByIdDesc();
         model.addAttribute("ingredient", new Ingredient());
         model.addAttribute("mealNutrition", mealNutrition);
         return "mealNutritions/add_ingredients";
@@ -76,22 +75,20 @@ public class MealNutritionController {
         if(result.hasErrors()){
             return "mealNutritions/add_ingredients";
         }
-        MealNutrition mealNutrition =mealNutritionService.findLast();
-        model.addAttribute("mealNutrition", mealNutritionService.addIngredient(ingredient, mealNutrition));
+        MealNutrition mealNutrition = mealNutritionRepository.findFirstByOrderByIdDesc();
+        model.addAttribute("mealNutrition", mealNutritionService.addIngredient(mealNutrition.getId(), ingredient));
         return "redirect:/mealNutritions/ingredient";
     }
 
     @GetMapping("/addMeal")
     public String addMeal(@AuthenticationPrincipal CurrentUser currentUser)
     {
-        MealNutrition mealNutrition =mealNutritionService.findLast();
-
+        MealNutrition mealNutrition = mealNutritionRepository.findFirstByOrderByIdDesc();
+        mealNutritionService.calculateMealNutritions(mealNutrition); //setting mealNutrition
         User user = currentUser.getUser();
-        History history = historyService.createAndSaveHistory(date, user);
-
-        mealNutritionService.getMealNutritionFromIngredients(mealNutrition); //setting mealNutrition
-        mealNutrition.setHistory(history);
-        mealNutritionService.save(mealNutrition);                       // and save it
+        mealNutrition.setUser(user);
+        mealNutrition.setDate(date);
+        mealNutritionRepository.save(mealNutrition);                       // and save it
 
         return "redirect:/mealNutritions/table/" + date.toString();
     }
@@ -99,10 +96,10 @@ public class MealNutritionController {
     @RequestMapping("/table")
     public String table(@AuthenticationPrincipal CurrentUser currentUser, Model model)
     {
-        mealNutritionService.deleteAllWithoutHistory();
+        mealNutritionRepository.deleteAllByDateIsNull();
         date = LocalDate.now();
         User user = currentUser.getUser();
-        List<MealNutrition> mealNutritionsOfDay = mealService.getMealNutritionsOfDay(user, LocalDate.now());
+        List<MealNutrition> mealNutritionsOfDay = mealNutritionRepository.findAllByUserAndDate(user, LocalDate.now());
         model.addAttribute("meals", mealNutritionsOfDay);
         model.addAttribute("date", date);
         return "/mealNutritions/your_eating";
@@ -113,7 +110,7 @@ public class MealNutritionController {
     {
         date = LocalDate.parse(dateString);
         User user = currentUser.getUser();
-        List<MealNutrition> mealNutritionsOfDay = mealService.getMealNutritionsOfDay(user, date);
+        List<MealNutrition> mealNutritionsOfDay = mealNutritionRepository.findAllByUserAndDate(user, LocalDate.now());
         model.addAttribute("meals", mealNutritionsOfDay);
         model.addAttribute("date", date);
         return "/mealNutritions/your_eating";
@@ -124,7 +121,7 @@ public class MealNutritionController {
     {
         date = date.minus(Period.ofDays(1));
         User user = currentUser.getUser();
-        List<MealNutrition> mealNutritionsOfDay = mealService.getMealNutritionsOfDay(user,date);
+        List<MealNutrition> mealNutritionsOfDay = mealNutritionRepository.findAllByUserAndDate(user, LocalDate.now());
         model.addAttribute("meals", mealNutritionsOfDay);
         model.addAttribute("date", date);
         return "/mealNutritions/your_eating";
@@ -135,9 +132,17 @@ public class MealNutritionController {
     {
         date = date.plus(Period.ofDays(1));
         User user = currentUser.getUser();
-        List<MealNutrition> mealNutritionsOfDay = mealService.getMealNutritionsOfDay(user,date);
+        List<MealNutrition> mealNutritionsOfDay = mealNutritionRepository.findAllByUserAndDate(user, LocalDate.now());
         model.addAttribute("meals", mealNutritionsOfDay);
         model.addAttribute("date", date);
         return "/mealNutritions/your_eating";
+    }
+
+    @RequestMapping("/delete_meal/{id}")
+    public String deleteMeal(@PathVariable Long id){
+        MealNutrition mealNutrition = mealNutritionRepository.getById(id);
+        LocalDate date = mealNutrition.getDate();
+        mealNutritionRepository.delete(mealNutrition);
+        return "redirect:/mealNutritions/table/" + date.toString();
     }
 }

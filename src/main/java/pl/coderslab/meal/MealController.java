@@ -5,10 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.ingredient.Ingredient;
-import pl.coderslab.mealNutrition.MealNutrition;
 import pl.coderslab.product.Product;
-import pl.coderslab.product.ProductService;
+import pl.coderslab.product.ProductRepository;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -18,14 +16,16 @@ import java.util.List;
 @RequestMapping("/meal")
 public class MealController {
     private final MealService mealService;
-    private final ProductService productService;
+    private MealRepository mealRepository;
+
+    private ProductRepository productRepository;
 
     @ModelAttribute("meals")
-    public List<Meal> meals(){return mealService.findAll();}
+    public List<Meal> meals(){return mealRepository.findAll();}
 
     @ModelAttribute("products")
     public List<Product> products(){
-        return productService.getAllProducts();
+        return productRepository.findAll();
     }
 
     @RequestMapping("/table")
@@ -35,7 +35,7 @@ public class MealController {
 
     @RequestMapping("/details/{mealId}")
     public String details(Model model, @PathVariable long mealId){
-        model.addAttribute("meal", mealService.findById(mealId));
+        model.addAttribute("meal", mealRepository.findMealById(mealId));
         return "/meals/details";
     }
     @GetMapping("/add")
@@ -49,7 +49,7 @@ public class MealController {
         if(result.hasErrors()){
             return "meals/addMeal";
         }
-        mealService.save(meal);
+        mealRepository.save(meal);
         return "redirect:/meal/table";
     }
 
@@ -61,7 +61,7 @@ public class MealController {
 
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable long id){
-        mealService.deleteById(id);
+        mealRepository.deleteById(id);
         return "redirect:/meal/table";
     }
 
