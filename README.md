@@ -27,6 +27,8 @@
 - Hibernate
 - MySql
 - JavaScript
+- JUnit
+- Mockito
 
 
 ## Features
